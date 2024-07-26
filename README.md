@@ -1,6 +1,7 @@
 # Light Types
 
 [![image](https://img.shields.io/pypi/v/light-types.svg)](https://pypi.python.org/pypi/light-types)
+[![codecov](https://codecov.io/gh/likeinlife/light-types/graph/badge.svg?token=7QUSPNC4CQ)](https://codecov.io/gh/likeinlife/light-types)
 [![Rye](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/rye/main/artwork/badge.json)](https://rye.astral.sh)
 [![image](https://img.shields.io/pypi/l/light-types.svg)](https://github.com/likeinlife/error_mapper/blob/main/LICENSE)
 <a href="http://mypy-lang.org/" target="_blank"><img src="https://img.shields.io/badge/mypy-checked-1F5082.svg" alt="Mypy checked"></a>
