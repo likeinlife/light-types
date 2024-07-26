@@ -3,8 +3,8 @@ from light_types import LightType
 from pydantic import BaseModel, TypeAdapter
 
 
-def test_with_pydantic():
-    class StartsWithString(LightType[str]):
+def test_with_pydantic() -> None:
+    class StartsWithString(str, LightType):
         @classmethod
         def validate(cls, value: str) -> bool:
             return value.startswith("String")

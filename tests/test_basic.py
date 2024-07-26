@@ -3,7 +3,7 @@ from light_types import LightType
 
 
 def test_basic():
-    class StartsWithString(LightType[str]):
+    class StartsWithString(str, LightType):
         @classmethod
         def validate(cls, value: str) -> bool:
             return value.startswith("String")

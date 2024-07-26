@@ -15,13 +15,18 @@ class LightType(tp.Generic[T], metaclass=LightTypeMeta):
 
     Example:
     ```python
-    class StartsWithString(LightType[str]):
+    class StartsWithString(str, LightType):
         @classmethod
         def validate(cls, value: str) -> bool:
             return value.startswith("String")
     ```
 
     """
+
+    __bounds__: type
+
+    def __init_subclass__(cls) -> None:
+        cls._discover_bounds()
 
     @classmethod
     @abc.abstractmethod
@@ -48,11 +53,19 @@ class LightType(tp.Generic[T], metaclass=LightTypeMeta):
 
     @classmethod
     def _check_type(cls, value: T) -> bool:
-        for i in cls.__orig_bases__:  # type: ignore
-            if i.__origin__ is LightType:
-                type_ = tp.get_args(i)[0]
-                return isinstance(value, type_)
-        return True
+        return isinstance(value, cls.__bounds__)
+
+    @classmethod
+    def _discover_bounds(cls) -> None:
+        for type_ in cls.__mro__:
+            if type_ is cls:
+                continue
+            if issubclass(type_, LightType):
+                break
+            cls.__bounds__ = type_
+            return
+        msg = "Can't discover bounds of LightType."
+        raise RuntimeError(msg)
 
     @classmethod
     def __raise_error(cls, value: T) -> tp.NoReturn:

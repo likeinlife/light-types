@@ -1,6 +1,6 @@
 [project]
 name = "light-types"
-version = "1.0.0"
+version = "1.0.1"
 description = "Parse, don't validate"
 authors = [
     { name = "likeinlife", email = "likeinlife@outlook.com" }
@@ -89,6 +89,7 @@ ignore = [
     "FA100",
     "B904",
     "ANN401",
+    "SLOT000",
 ]
 exclude = []
 
@@ -121,7 +122,6 @@ exclude_also = [
     "class .*\\bProtocol\\):",
     "@(abc\\.)?abstractmethod",
     ]
-exclude_empty = true
 omit = [
     # omit anything in a .local directory anywhere
     "*/.local/*",
