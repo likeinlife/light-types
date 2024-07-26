@@ -1,3 +1,4 @@
+import abc
 import typing as tp
 
 from pydantic import GetCoreSchemaHandler
@@ -23,12 +24,13 @@ class LightType(tp.Generic[T], metaclass=LightTypeMeta):
     """
 
     @classmethod
-    def validate(cls, value: T) -> bool:  # noqa: ARG003
-        return True
+    @abc.abstractmethod
+    def validate(cls, value: T) -> bool:
+        ...
 
     @tp.final
     @classmethod
-    def parse(cls, value: T) -> T:
+    def _parse(cls, value: T) -> T:
         checks = cls._check_type, cls.validate
 
         for check in checks:
@@ -43,7 +45,7 @@ class LightType(tp.Generic[T], metaclass=LightTypeMeta):
         source_type: tp.Any,
         handler: GetCoreSchemaHandler,
     ) -> CoreSchema:
-        return core_schema.no_info_before_validator_function(cls.parse, handler(str))
+        return core_schema.no_info_before_validator_function(cls._parse, handler(str))
 
     @classmethod
     def _check_type(cls, value: T) -> bool:

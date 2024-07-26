@@ -39,6 +39,7 @@ dev-dependencies = [
     "mypy>=1.11.0",
     "pre-commit>=3.7.1",
     "pytest>=8.3.2",
+    "pytest-cov>=5.0.0",
 ]
 
 [tool.hatch.metadata]
@@ -119,13 +120,13 @@ exclude_also = [
     "if TYPE_CHECKING:",
     "class .*\\bProtocol\\):",
     "@(abc\\.)?abstractmethod",
+    "...",
     ]
 exclude_empty = true
 omit = [
     # omit anything in a .local directory anywhere
     "*/.local/*",
     "__init__.py",
-    "tests/*",
     "*/tests/*",
     # omit anything in a .venv directory anywhere
     ".venv/*",

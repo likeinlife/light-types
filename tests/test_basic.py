@@ -8,12 +8,12 @@ def test_basic():
         def validate(cls, value: str) -> bool:
             return value.startswith("String")
 
-    result = StartsWithString.parse("String")
+    result = StartsWithString("String")
     assert result
     assert isinstance(result, str)
 
     with pytest.raises(TypeError):
-        StartsWithString.parse(1)  # type: ignore
+        StartsWithString(1)  # type: ignore
 
     with pytest.raises(TypeError):
-        StartsWithString.parse("NotRight")
+        StartsWithString("NotRight")
