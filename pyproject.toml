@@ -1,0 +1,135 @@
+[project]
+name = "light-types"
+version = "0.0.1"
+description = "Parse, don't validate"
+authors = [
+    { name = "likeinlife", email = "likeinlife@outlook.com" }
+]
+dependencies = [
+    "pydantic>=2.8.2",
+]
+readme = "README.md"
+requires-python = ">= 3.11"
+license = "MIT"
+keywords = ["phantom types", "value object"]
+classifiers = [
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://pypi.org/project/light-types/"
+Repository = "https://github.com/likeinlife/light-types/"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "ruff>=0.5.5",
+    "mypy>=1.11.0",
+    "pre-commit>=3.7.1",
+    "pytest>=8.3.2",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/light_types"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    # Allow boolean type in func arguments
+    "FBT001",
+    # Allow PEP585 annotations like dict[str, str] 
+    "FA102",
+    # No blankline before class
+    "D203",
+    # Multiline string summary should start at the first line
+    "D213",
+    # Allow no-typehints
+    "ANN101",
+    "ANN102",
+    # Disable doc-string rules
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+    "D105",
+    "D107",
+    "D407",
+    "D406",
+    # Allow type: ignore
+    "PGH003",
+    # Useless
+    "FBT",
+    "FIX",
+    "TD003",
+    "FA100",
+    "B904",
+    "ANN401",
+]
+exclude = []
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = [
+    "fastapi.Depends",
+    "faststream.Depends",
+    "fastapi.params.Depends",
+    "fastapi.Query",
+    "fastapi.params.Query",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["D", "S", "ANN", "PLR"]
+
+[tool.mypy]
+ignore_missing_imports = true
+follow_imports = "normal"
+
+[tool.coverage.report]
+exclude_also = [
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+    ]
+exclude_empty = true
+omit = [
+    # omit anything in a .local directory anywhere
+    "*/.local/*",
+    "__init__.py",
+    "tests/*",
+    "*/tests/*",
+    # omit anything in a .venv directory anywhere
+    ".venv/*",
+    "*/containers/*",
+    "*/migrations/*",
+    "*/core/*",
+]
