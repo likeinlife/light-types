@@ -120,7 +120,6 @@ exclude_also = [
     "if TYPE_CHECKING:",
     "class .*\\bProtocol\\):",
     "@(abc\\.)?abstractmethod",
-    "...",
     ]
 exclude_empty = true
 omit = [
