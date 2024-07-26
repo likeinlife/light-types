@@ -61,7 +61,7 @@ select = ["ALL"]
 ignore = [
     # Allow boolean type in func arguments
     "FBT001",
-    # Allow PEP585 annotations like dict[str, str] 
+    # Allow PEP585 annotations like dict[str, str]
     "FA102",
     # No blankline before class
     "D203",

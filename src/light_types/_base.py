@@ -25,8 +25,7 @@ class LightType(tp.Generic[T], metaclass=LightTypeMeta):
 
     @classmethod
     @abc.abstractmethod
-    def validate(cls, value: T) -> bool:
-        ...
+    def validate(cls, value: T) -> bool: ...
 
     @tp.final
     @classmethod
