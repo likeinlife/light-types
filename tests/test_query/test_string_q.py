@@ -14,6 +14,27 @@ def test_startswith() -> None:
     assert not q.compute("fo")
 
 
+def test_endswith() -> None:
+    q = StringQ().endswith("end")
+
+    assert q.compute("testend")
+    assert not q.compute("false")
+
+
+def test_equal() -> None:
+    q = StringQ() == "end"
+
+    assert q.compute("end")
+    assert not q.compute("not-end")
+
+
+def test_not_equal() -> None:
+    q = StringQ() != "end"
+
+    assert not q.compute("end")
+    assert q.compute("not-end")
+
+
 def test_comparing() -> None:
     q = StringQ() == "foo"
 
@@ -30,7 +51,7 @@ def test_comparing_mixed() -> None:
 
 
 def test_comparing_length() -> None:
-    q = 1 < StringQ().length() < 10
+    q = 1 <= (1 < StringQ().length() < 10) <= 11
 
     assert q.compute("foo")
     assert not q.compute("")
@@ -38,6 +59,5 @@ def test_comparing_length() -> None:
 
 
 def test_comparing_length_equal() -> None:
-    q = StringQ().length() == 10
-
-    assert q.compute("a" * 10)
+    assert (StringQ().length() == 10).compute("a" * 10)
+    assert (StringQ().length() != 10).compute("a" * 11)

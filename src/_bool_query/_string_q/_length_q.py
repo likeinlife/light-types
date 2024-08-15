@@ -1,23 +1,11 @@
 from dataclasses import dataclass
 from typing import Self
 
-from _bool_query._interface import IQ
-
-from ._types import StringValidatorType
+from _bool_query._base import BaseQ
 
 
 @dataclass(eq=False)
-class LengthQ(IQ):
-    _validators: list[StringValidatorType]
-
-    def startswith(self, prefix: str) -> Self:
-        self._validators.append(lambda s: s.startswith(prefix))
-        return self
-
-    def endswith(self, suffix: str) -> Self:
-        self._validators.append(lambda s: s.endswith(suffix))
-        return self
-
+class LengthQ(BaseQ[str]):
     def __le__(self, length: int) -> Self:
         self._validators.append(lambda s: len(s) <= length)
         return self
@@ -39,12 +27,5 @@ class LengthQ(IQ):
         return self
 
     def __ne__(self, length: int) -> Self:  # type: ignore
-        self._validators.append(lambda s: len(s) == length)
+        self._validators.append(lambda s: len(s) != length)
         return self
-
-    def custom(self, validator: StringValidatorType) -> Self:
-        self._validators.append(validator)
-        return self
-
-    def compute(self, value: str) -> bool:
-        return all(validator(value) for validator in self._validators)
