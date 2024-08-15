@@ -45,6 +45,29 @@ class MyModel(BaseModel):
 assert TypeAdapter(MyModel).validate_python({"value": "StringOk"})
 ```
 
+## QLightType
+
+```python
+from light_types import QLightType, NumericQ
+
+class NumericBetween5And10(int, QLightType):
+    validator = (NumericQ() > 5).custom(lambda n: n < 10)
+```
+
+```python
+from light_types import QLightType, StringQ
+
+class StartsWithString(str, QLightType):
+    validator = StringQ().startswith("String")
+```
+
+```python
+from light_types import QLightType, StringQ
+
+    class StringWith2O(str, QLightType):
+    validator = StringQ().startswith("String") & StringQ().custom(lambda s: s.count("o") >= 2)
+```
+
 # Tests, linting, formatting
 
 - `rye test | lint | fmt`
