@@ -64,7 +64,7 @@ class StartsWithString(str, QLightType):
 ```python
 from light_types import QLightType, StringQ
 
-    class StringWith2O(str, QLightType):
+class StringWith2O(str, QLightType):
     validator = StringQ().startswith("String") & StringQ().custom(lambda s: s.count("o") >= 2)
 ```
 
