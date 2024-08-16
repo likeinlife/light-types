@@ -1,6 +1,6 @@
 [project]
 name = "light-types"
-version = "1.2.1"
+version = "1.2.2"
 description = "Parse, don't validate"
 authors = [
     { name = "likeinlife", email = "likeinlife@outlook.com" }
@@ -46,7 +46,7 @@ dev-dependencies = [
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/light_types"]
+packages = ["src/light_types", "src/_bool_query"]
 
 [tool.ruff]
 line-length = 120
