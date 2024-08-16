@@ -1,6 +1,6 @@
 [project]
 name = "light-types"
-version = "1.2.0"
+version = "1.2.1"
 description = "Parse, don't validate"
 authors = [
     { name = "likeinlife", email = "likeinlife@outlook.com" }

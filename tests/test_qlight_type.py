@@ -1,5 +1,5 @@
 import pytest
-from light_types import NumericQ, QLightType, StringQ
+from light_types import LengthQ, NumericQ, QLightType, StringQ
 
 
 def test_query_startswith():
@@ -48,3 +48,20 @@ def test_query_string_with_and():
 
     with pytest.raises(TypeError):
         StringWith2O("String")
+
+
+def test_query_with_string_and_length():
+    class StringWith2O(str, QLightType):
+        validator = StringQ().startswith("String") & (LengthQ[str]() > 5)
+
+    result = StringWith2O("Stringoo")
+    assert result
+    assert isinstance(result, str)
+
+    with pytest.raises(TypeError):
+        StringWith2O(1)  # type: ignore
+
+    with pytest.raises(TypeError):
+        StringWith2O("NotRight")
+
+    assert StringWith2O("String")
