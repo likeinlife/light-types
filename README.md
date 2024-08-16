@@ -75,6 +75,13 @@ class StringWith2O(str, QLightType):
     validator = StringQ().startswith("String") | ~StringQ().custom(lambda s: s.count("o") >= 2)
 ```
 
+```python
+from light_types import QLightType, StringQ, LengthQ
+
+class StringWith2O(str, QLightType):
+    validator = StringQ().startswith("foo") & (LengthQ[str]() > 5)
+```
+
 # Tests, linting, formatting
 
 - `rye test | lint | fmt`

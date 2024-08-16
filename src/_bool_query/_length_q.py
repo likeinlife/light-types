@@ -1,11 +1,14 @@
+from collections.abc import Sized
 from dataclasses import dataclass
-from typing import Self
+from typing import Self, TypeVar
 
 from _bool_query._base import BaseQ
 
+IndT = TypeVar("IndT", bound=Sized)
+
 
 @dataclass(eq=False)
-class LengthQ(BaseQ[str]):
+class LengthQ(BaseQ[IndT]):
     def __le__(self, length: int) -> Self:
         self._validators.append(lambda s: len(s) <= length)
         return self

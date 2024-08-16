@@ -1,4 +1,4 @@
-from _bool_query import IQ, NumericQ, StringQ
+from _bool_query import IQ, LengthQ, NumericQ, StringQ
 
 from ._base import BaseLightType
 from ._light_type import LightType
@@ -10,5 +10,6 @@ __all__ = (
     "BaseLightType",
     "StringQ",
     "NumericQ",
+    "LengthQ",
     "IQ",
 )
